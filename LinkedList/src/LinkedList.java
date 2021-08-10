@@ -1,9 +1,11 @@
 import java.sql.Date;
+import java.util.spi.CurrencyNameProvider;
 
 public class LinkedList {
     
     private Node first;
     private Node last;
+    private int size=0;
     private class Node
     {
         private int data;
@@ -27,6 +29,8 @@ public class LinkedList {
             last.next=node;
              last=node;
         }
+
+        size++;
     }
 
     public void AddFirst(int item)
@@ -43,6 +47,7 @@ public class LinkedList {
             node.next=first;
             first=node;
         }
+        size++;
 
     }
 
@@ -97,7 +102,71 @@ public class LinkedList {
 
         }
 
+       size++;
+       
+     }
+
+     public boolean Contains(int item)
+     {
+         Node current=first;
+         boolean result=false;
+         while(current!=null)
+         {
+             if(current.data==item)
+              result=true;
+            
+
+            current=current.next;
+
+         }
+         return result;
+     }
+
+     public void RemoveFirst()
+     {
+
+         
+        first=first.next;
+        size--;
+     }
+
+     public void RemoveLast()
+     {
+         var current = first;
+         while(current!=null)
+         {
+             if(current.next.next==null)
+             {
+                 current.next=null;
+                 break;
+             }
+             
+             else{
+                 current=current.next;
+             }
+             size--;
+         }
+     }
+
+     public int Size()
+     {
+       
+        return size;
+     }
 
 
+     public int[] toArray()
+     {
+         int array[]=new int[size];
+         var current=first;
+         var index=0;
+         while(current!=null)
+         {
+             array[index]=current.data;
+             index++;
+             current=current.next;
+
+         }
+         return array;
      }
 }
